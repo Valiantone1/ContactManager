@@ -8,6 +8,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"></application>
+        android:theme="@style/AppTheme">
+        <activity android:name=".ContactStorage" />
+        <activity android:name=".ContactActivity" />
+    </application>
 
 </manifest>

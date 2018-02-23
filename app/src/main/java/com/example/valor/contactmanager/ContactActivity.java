@@ -1,5 +1,6 @@
 package com.example.valor.contactmanager;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
+import java.nio.channels.InterruptedByTimeoutException;
 import java.util.ArrayList;
 
 public class ContactActivity extends AppCompatActivity {
@@ -32,20 +34,32 @@ public class ContactActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
 
         //TODO onClick event calls an intent for parcelable contact
-        //initilize listView and render progress bar
+        //initialize listView and render progress bar
 
+        addContactBttn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent addIntent = new Intent(getApplicationContext(),ContactStorage.class);
+                startActivity(addIntent);
+            }
+        });
 
         try {
 
             //TODO build contact list from AsyncTask class
-           // ArrayList<Contact> contactResults = new GetDataReader().execute(contact).get();
-           // buildContactList(contactResults);
+            Contact inputContact = getIntent().getParcelableExtra("Contact");
+            ArrayList<Contact> contactResults = new GetDataReader().execute(inputContact).get();
+            buildContactList(contactResults);
         } catch (Exception e) {
             Log.e(TAG, e.toString());
         }
 
 
     }
+
+
+
+
 
 
     //Rafay: method build list of contact info from an ArrayList of contacts
